@@ -1,0 +1,236 @@
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 32
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++----------------------------+
+| Database                   |
++----------------------------+
+| bit2                       |
+| bit2022                    |
+| hospital_db                |
+| hospital_management_sys    |
+| hospital_management_system |
+| information_schema         |
+| must                       |
+| mydb                       |
+| mysql                      |
+| performance_schema         |
+| sys                        |
++----------------------------+
+11 rows in set (0.00 sec)
+
+mysql> use hospital_db;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_hospital_db |
++-----------------------+
+| admissions            |
+| appointment           |
+| billing               |
+| department            |
+| doctor                |
+| login                 |
+| medicalrecord         |
+| patient               |
+| room                  |
+| staff                 |
++-----------------------+
+10 rows in set (0.00 sec)
+
+mysql> describe admissions;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| AdmissionID   | int         | NO   | PRI | NULL    | auto_increment |
+| PatientName   | varchar(30) | NO   | MUL | NULL    |                |
+| RoomID        | int         | NO   | MUL | NULL    |                |
+| AdmissionDate | date        | NO   |     | NULL    |                |
+| DischargeDate | date        | NO   |     | NULL    |                |
+| room_RoomID   | int         | NO   | MUL | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from admissions;
++-------------+------------------+--------+---------------+---------------+-------------+
+| AdmissionID | PatientName      | RoomID | AdmissionDate | DischargeDate | room_RoomID |
++-------------+------------------+--------+---------------+---------------+-------------+
+|           1 | Adong Jane       |      1 | 2023-02-04    | 2023-03-17    |           1 |
+|           2 | Tumukunde Gerald |      2 | 2022-06-09    | 2022-08-19    |           2 |
+|           3 | Odong Gerald     |      3 | 2020-07-19    | 2020-08-02    |           3 |
+|           4 | Atwine Allan     |      4 | 2021-09-13    | 2021-10-16    |           4 |
+|           5 | Semuko steven    |      5 | 2019-05-30    | 2019-06-19    |           5 |
+|           6 | Aine Jose        |      6 | 2020-06-27    | 2020-09-24    |           6 |
+|           7 | Alinda Grace     |      7 | 2019-04-23    | 2020-07-23    |           7 |
+|           8 | Odong Peter      |      8 | 2018-05-24    | 2018-05-29    |           8 |
+|           9 | ASingwire Ritah  |      9 | 2022-04-30    | 2022-07-26    |           9 |
+|          10 | Atim joan        |     10 | 2017-02-17    | 2017-08-27    |          10 |
++-------------+------------------+--------+---------------+---------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from appointment;
++---------------+---------------------+---------------------+-------------------+-----------------+-------------------+
+| AppointmentID | PatientName         | AppointmentDate     | Status            | doctor_DoctorID | patient_PatientID |
++---------------+---------------------+---------------------+-------------------+-----------------+-------------------+
+|             1 | Akena Morris        | 2022-09-19 00:00:00 | Scan              |               1 |                 1 |
+|             2 | Adong Jane          | 2023-04-27 00:00:00 | Surgery           |               2 |                 2 |
+|             3 | Okello Tom          | 2022-02-21 00:00:00 | Tooth extraction  |               3 |                 3 |
+|             4 | Akello Gloria       | 2020-05-23 00:00:00 | Blood test        |               4 |                 4 |
+|             5 | Omongin Timothy     | 2019-08-27 00:00:00 | Skin check        |               5 |                 5 |
+|             6 | Kamanyire Moses     | 2019-08-23 00:00:00 | Dental care       |               6 |                 6 |
+|             7 | Kakaire simon       | 0000-00-00 00:00:00 | Blood test        |               7 |                 7 |
+|             8 | Muhumuza micky      | 2017-02-24 00:00:00 | Tooth extraction  |               8 |                 8 |
+|             9 | Mukundane Ronny     | 2019-11-19 00:00:00 | Malaria treatment |               9 |                 9 |
+|            10 | Tukwasiibwe Timothy | 2019-01-28 00:00:00 | Typhoid treatment |              10 |                10 |
++---------------+---------------------+---------------------+-------------------+-----------------+-------------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from billing;
++-----------+------------------+-----------+-------------------+------------+
+| billingID | PatientName      | Address   | ServiceRendered   | Cost       |
++-----------+------------------+-----------+-------------------+------------+
+|         1 | Tumukunde Tom    | Kamukuzi  | Malaria treatment | shs 70000  |
+|         2 | Otim Ben         | Mukono    | HIV test          | shs 10000  |
+|         3 | Odong Peter      | Wakiso    | Immunisation      | free       |
+|         4 | Mukundane Ronald | Mubende   | Full blood test   | shs 50000  |
+|         5 | Senkima Micheal  | Masaka    | Malaria treatment | shs 60000  |
+|         6 | Aine Nobert      | Rushere   | HIV test          | shs 10000  |
+|         7 | Atim Jane        | Soroti    | Pregnance         | shs 15000  |
+|         8 | Alinda Grace     | Rukungiri | Typhoid treatment | shs 170000 |
+|         9 | Akena Morris     | Soroti    | Tooth extraction  | shs 50000  |
+|        10 | Ocheng Steven    | Soroti    | Scan              | shs 30000  |
++-----------+------------------+-----------+-------------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from department;
++--------------+----------------+
+| DepartmentID | DepartmentName |
++--------------+----------------+
+|            1 | Dental         |
+|            2 | Laboratory     |
+|            3 | Cancer         |
+|            4 | Adminstration  |
+|            5 | Pharmacy       |
+|            6 | Physiothylapy  |
+|            7 | Marternity     |
+|            8 | Radiology      |
+|            9 | Paediatrics    |
+|           10 | Gynacology     |
+|           11 | Orthopedics    |
++--------------+----------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from doctor;
++----------+-----------+----------+--------------+---------------+-------------------+
+| DoctorID | FirstName | LastName | Specialty    | ContactNumber | Email             |
++----------+-----------+----------+--------------+---------------+-------------------+
+|        1 | Otim      | Timothy  | Surgeon      | 789655235     | timothy@gmail.com |
+|        2 | Odong     | Simon    | Dentist      | 789654378     | simon@gmail.com   |
+|        3 | Namala    | Gloria   | Ginockkckc   | 7854566677    | gloria@gmail.com  |
+|        4 | Muhumuza  | Micheal  | Surgeon      | 785762789     | micheal@gmail.com |
+|        5 | Nampala   | Edith    | Dentist      | 779002827     | edith@gmail.com   |
+|        6 | Obbo      | Gerald   | Pharmacist   | 0779654321    | gerald@gmail.com  |
+|        7 | Akello    | Jane     | Gynacologist | 0753768754    | jane@gmail.com    |
+|        8 | Amanya    | Ronald   | Surgeon      | 0779876598    | ronald@gmail.com  |
+|        9 | Tukole    | Hillary  | Pharmacist   | 0788654390    | hillary@gmail.com |
+|       10 | Tukole    | Nico     | Dentist      | 0789654586    | nico@gmail.com    |
++----------+-----------+----------+--------------+---------------+-------------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from login;
++---------+-------------------+----------+
+| LoginID | UserName          | Password |
++---------+-------------------+----------+
+|       1 | Ronald_Amanya     | pop      |
+|       2 | Edith_Nampala     | edith    |
+|       3 | Hillary_Musinguzi | hillary  |
+|       4 | Edith_G           | edith    |
+|       5 | Ron_Ama           | ron      |
+|       6 | Kaka_Tim          | tim      |
+|       7 | Odong_Inno        | inno     |
+|       8 | Ali_Moses         | moses    |
+|       9 | Muk_Bright        | bright   |
+|      10 | Tuk_Martin        | martin   |
++---------+-------------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from medicalrecord;
++----------+-------------------+------------+-------------------+-------------------+-----------------+
+| RecordID | PatientName       | Date       | Treatment         | patient_PatientID | doctor_DoctorID |
++----------+-------------------+------------+-------------------+-------------------+-----------------+
+|        1 | Mukundane Moses   | 2022-02-25 | Malaria treatment |                 1 |               1 |
+|        2 | Kahonda Micheal   | 2019-08-17 | Typhoid treatment |                 2 |               2 |
+|        3 | Akello Ritah      | 2018-03-27 | Tooth extraction  |                 3 |               3 |
+|        4 | Adong Moureen     | 2019-12-18 | Scan              |                 4 |               4 |
+|        5 | Nalukenge Daphine | 2023-03-27 | Root canal        |                 5 |               5 |
+|        6 | Okello Timothy    | 2023-07-18 | Consultation      |                 6 |               6 |
+|        7 | Muwanguzi Daniel  | 2018-09-27 | Malaria treatment |                 7 |               7 |
+|        8 | Odong Steven      | 2015-05-19 | Tooth extraction  |                 8 |               8 |
+|        9 | Okiror Peter      | 0000-00-00 | Typhoid treatment |                 9 |               9 |
+|       10 | Kakaire Dan       | 2013-11-28 | Blood check       |                10 |              10 |
++----------+-------------------+------------+-------------------+-------------------+-----------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from patient;
++-----------+-----------+----------+-------------+--------+---------------+----------+
+| PatientID | FirstName | LastName | DateOfBirth | Gender | ContactNumber | Address  |
++-----------+-----------+----------+-------------+--------+---------------+----------+
+|         1 | Musinguzi | Micheal  | 1993-06-08  | Male   | 789543298     | Ibanda   |
+|         2 | Opio      | Dominic  | 1987-11-01  | Male   | 755765432     | Arua     |
+|         3 | Kakaiire  | Moses    | 1976-04-12  | Male   | 789654346     | Jinja    |
+|         4 | Nakiganda | Diana    | 2002-05-02  | Female | 793982211     | Masaka   |
+|         5 | Odong     | micheal  | 1995-03-27  | Male   | 798534356     | Gulu     |
+|         6 | Kisambila | Gerald   | 1994-09-25  | Male   | 789654322     | Jinja    |
+|         7 | Muhangi   | Amos     | 1987-02-24  | Male   | 789654321     | Kabale   |
+|         8 | Aine      | Mark     | 1993-03-12  | Male   | 789654328     | Kisoro   |
+|         9 | Komakech  | Ronald   | 1999-11-18  | Male   | 7896789768    | Packwack |
+|        10 | Akello    | Mary     | 1992-07-28  | Female | 7896899654    | Soroti   |
+|        11 | Atukunda  | Gloria   | 1987-12-27  | Female | 754875353     | Mbarara  |
++-----------+-----------+----------+-------------+--------+---------------+----------+
+11 rows in set (0.00 sec)
+
+mysql> select * from room;
++--------+--------------+--------------+-------------------------+
+| RoomID | RoomName     | DepartmentID | department_DepartmentID |
++--------+--------------+--------------+-------------------------+
+|      1 | Dental       |            1 |                       1 |
+|      2 | Surgery      |            2 |                       2 |
+|      3 | Lab          |            3 |                       3 |
+|      4 | Consultation |            4 |                       4 |
+|      5 | ward         |            5 |                       5 |
+|      6 | Pharmacy     |            6 |                       6 |
+|      7 | Reception    |            7 |                       7 |
+|      8 | Admission    |            8 |                       8 |
+|      9 | Scan         |            9 |                       9 |
+|     10 | Gymnasitic   |           10 |                      10 |
++--------+--------------+--------------+-------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from staff;
++---------+-----------------+--------------+-------------------------+---------------+
+| StaffID | Name            | Role         | department_DepartmentID | login_LoginID |
++---------+-----------------+--------------+-------------------------+---------------+
+|       1 | Amanya Ronald   | Technitian   |                       1 |             1 |
+|       2 | Edith Nampala   | Dentist      |                       2 |             2 |
+|       3 | Odong Micheal   | Pharmacist   |                       3 |             3 |
+|       4 | Otim Isaac      | Gynacologist |                       4 |             4 |
+|       5 | Akello Jane     | Nurse        |                       5 |             5 |
+|       6 | Mukundane Tom   | Chemist      |                       6 |             6 |
+|       7 | Asingwire Resty | Nurse        |                       7 |             7 |
+|       8 | Omongin Mose    | Dentist      |                       8 |             8 |
+|       9 | Among Mary      | Cleaner      |                       9 |             9 |
+|      10 | Atim Brenda     | Pharmacist   |                      10 |            10 |
++---------+-----------------+--------------+-------------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql>
